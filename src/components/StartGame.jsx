@@ -5,11 +5,11 @@ const StartGame = ({ toggle }) => {
   return (
     <Container className='md:flex-row flex-col-reverse items-center justify-center md:justify-between'>
       <div className="dice-img w-full md:w-[50%]">
-            <img className='w-full' src="/images/dice.png" alt="" srcset="" />
+        <img className='w-full' src="/images/dice.png" alt="" srcset="" />
       </div>
       <div className="game-start text-center w-full md:w-[45%]">
-            <h1 className='text-7xl font-bold mb-5'>DICE GAME</h1>
-            <Button toggle={toggle} text='Play Now' />
+        <h1 className='text-7xl font-bold mb-5'>DICE GAME</h1>
+        <Button toggle={toggle} text='Play Now' />
       </div>
     </Container>
   )

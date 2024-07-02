@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import GameScore from './GameScore'
 import NumberSelector from './NumberSelector'
+import Button from './Button'
 import RollDice from './RollDice'
 import { useState } from 'react'
 
@@ -8,29 +9,42 @@ const GamePlayScreen = () => {
   const [score, setScore] = useState(0);
   const [clickedBtn, setClickedBtn] = useState();
   const [currentDice, setCurrentDice] = useState(1);
+  const [error, setError] = useState();
 
   const generateRandomNumber = () => {
     return Math.floor(Math.random() * 6) + 1;
   };
 
   const rollDice = () => {
+    if (!clickedBtn) {
+      setError('Please select a number to roll dice')
+      return
+    };
+    setError(" ")
     const randomNumber = generateRandomNumber();
     setCurrentDice(randomNumber);
 
-    if(clickedBtn === randomNumber){
+    if (clickedBtn === randomNumber) {
       setScore((prev) => prev + 2);
     } else {
       setScore((prev) => prev - 2);
     }
+    setClickedBtn(undefined)
   };
-
+  const resetScore = () =>{
+    setScore(0)
+  }
   return (
     <Container>
       <main className='flex justify-between items-start gap-10 w-full'>
         <GameScore score={score} />
-        <NumberSelector setClickedBtn={setClickedBtn} clickedBtn={clickedBtn} />
+        <NumberSelector error={error} setError={setError} setClickedBtn={setClickedBtn} clickedBtn={clickedBtn} />
       </main>
       <RollDice currentDice={currentDice} rollDice={rollDice} />
+      <div className=" w-full flex flex-col gap-5 justify-center items-center">
+        <Button toggle={resetScore} text="Reset Score" bg="white" color="black" />
+        <Button text="Show Score" />
+      </div>
     </Container>
   )
 }

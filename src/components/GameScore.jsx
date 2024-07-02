@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const GameScore = ({score}) => {
+const GameScore = ({ score }) => {
   return (
     <ScoreWrapper>
       <h1>{score}</h1>
@@ -13,7 +13,7 @@ const GameScore = ({score}) => {
 export default GameScore
 
 const ScoreWrapper = styled.div`
- border: 1px solid black;
+ 
  display: flex;
  flex-direction: column;
  align-items: center;
