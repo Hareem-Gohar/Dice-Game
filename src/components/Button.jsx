@@ -1,9 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = (props) => {
   return (
-    <Btn color={props.color} background={props.bg} onClick={props.toggle}>{props.text}</Btn>
+    <Btn color={props.color} background={props.bg} onClick={props.toggle}>
+      {props.text}
+    </Btn>
   );
 };
 
@@ -20,7 +22,7 @@ const Btn = styled.button`
   cursor: pointer;
   transition: 0.2s ease-in background-color;
   border-radius: 10px;
-  
+
   &:hover {
     border: 1px solid black;
     background-color: #fff;

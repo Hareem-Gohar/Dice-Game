@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import GameScore from './GameScore';
-import NumberSelector from './NumberSelector';
-import Button from './Button';
-import RollDice from './RollDice';
-import { useState } from 'react';
-import Rules from './Rules';
+import styled from "styled-components";
+import GameScore from "./GameScore";
+import NumberSelector from "./NumberSelector";
+import Button from "./Button";
+import RollDice from "./RollDice";
+import { useState } from "react";
+import Rules from "./Rules";
 
 const GamePlayScreen = () => {
   const [score, setScore] = useState(0);
@@ -19,7 +19,7 @@ const GamePlayScreen = () => {
 
   const rollDice = () => {
     if (!clickedBtn) {
-      setError('Please select a number to roll dice');
+      setError("Please select a number to roll dice");
       return;
     }
     setError(" ");
@@ -44,13 +44,23 @@ const GamePlayScreen = () => {
 
   return (
     <Container>
-      <main className='flex justify-between items-start gap-10 w-full'>
+      <main className="flex justify-between items-start gap-10 w-full">
         <GameScore score={score} />
-        <NumberSelector error={error} setError={setError} setClickedBtn={setClickedBtn} clickedBtn={clickedBtn} />
+        <NumberSelector
+          error={error}
+          setError={setError}
+          setClickedBtn={setClickedBtn}
+          clickedBtn={clickedBtn}
+        />
       </main>
       <RollDice currentDice={currentDice} rollDice={rollDice} />
       <div className="w-full flex flex-col gap-5 justify-center items-center">
-        <Button toggle={resetScore} text="Reset Score" bg="white" color="black" />
+        <Button
+          toggle={resetScore}
+          text="Reset Score"
+          bg="white"
+          color="black"
+        />
         <Button toggle={showRules} text="Show Rules" bg="black" color="white" />
       </div>
       {rules && <Rules />}
