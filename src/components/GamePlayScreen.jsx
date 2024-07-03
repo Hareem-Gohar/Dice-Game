@@ -1,15 +1,17 @@
-import styled from 'styled-components'
-import GameScore from './GameScore'
-import NumberSelector from './NumberSelector'
-import Button from './Button'
-import RollDice from './RollDice'
-import { useState } from 'react'
+import styled from 'styled-components';
+import GameScore from './GameScore';
+import NumberSelector from './NumberSelector';
+import Button from './Button';
+import RollDice from './RollDice';
+import { useState } from 'react';
+import Rules from './Rules';
 
 const GamePlayScreen = () => {
   const [score, setScore] = useState(0);
   const [clickedBtn, setClickedBtn] = useState();
   const [currentDice, setCurrentDice] = useState(1);
   const [error, setError] = useState();
+  const [rules, setRules] = useState(false);
 
   const generateRandomNumber = () => {
     return Math.floor(Math.random() * 6) + 1;
@@ -17,10 +19,10 @@ const GamePlayScreen = () => {
 
   const rollDice = () => {
     if (!clickedBtn) {
-      setError('Please select a number to roll dice')
-      return
-    };
-    setError(" ")
+      setError('Please select a number to roll dice');
+      return;
+    }
+    setError(" ");
     const randomNumber = generateRandomNumber();
     setCurrentDice(randomNumber);
 
@@ -29,11 +31,17 @@ const GamePlayScreen = () => {
     } else {
       setScore((prev) => prev - 2);
     }
-    setClickedBtn(undefined)
+    setClickedBtn(undefined);
   };
-  const resetScore = () =>{
-    setScore(0)
-  }
+
+  const resetScore = () => {
+    setScore(0);
+  };
+
+  const showRules = () => {
+    setRules(!rules);
+  };
+
   return (
     <Container>
       <main className='flex justify-between items-start gap-10 w-full'>
@@ -41,15 +49,16 @@ const GamePlayScreen = () => {
         <NumberSelector error={error} setError={setError} setClickedBtn={setClickedBtn} clickedBtn={clickedBtn} />
       </main>
       <RollDice currentDice={currentDice} rollDice={rollDice} />
-      <div className=" w-full flex flex-col gap-5 justify-center items-center">
+      <div className="w-full flex flex-col gap-5 justify-center items-center">
         <Button toggle={resetScore} text="Reset Score" bg="white" color="black" />
-        <Button text="Show Score" />
+        <Button toggle={showRules} text="Show Rules" bg="black" color="white" />
       </div>
+      {rules && <Rules />}
     </Container>
-  )
-}
+  );
+};
 
-export default GamePlayScreen
+export default GamePlayScreen;
 
 const Container = styled.div`
   max-width: 1280px;
@@ -60,4 +69,4 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-`
+`;
